@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+
+    <p>Drag the colours into the rectangle</p>
+    <div class="pitMainDiv">
+        <div id="div1" class="pit" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="div2" class="pit" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="div3" class="pit" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="div4" class="pit" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+
+    <div class="colourCodesDiv">
+        <div id="cRed" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+        <div id="cGreen" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+        <div id="cBlue" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+		<div id="cYellow" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+		<div id="cMajenta" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+		<div id="cCyan" class="bubble" draggable="true" ondragstart="drag(event)"></div>
+    </div>
+</body>
+
+</html>

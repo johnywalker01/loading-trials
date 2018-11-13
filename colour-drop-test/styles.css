@@ -1,0 +1,44 @@
+ #colourCodesDiv {
+  width: 150px;
+  height: 70px;
+  padding: 5px 10px;
+  border: 1px solid #aaaaaa;
+}
+.pitMainDiv{
+  padding: 10px;
+  text-align: center;
+}
+.pit {
+  width: 150px;
+  height: 70px;
+  padding: 5px 10px;
+  border: 1px solid #aaaaaa;
+  display: inline-block;
+}
+.colourCodesDiv{
+  text-align: center;
+}
+.bubble{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+}
+#cRed{
+  background-color: #ff0000;
+}
+#cGreen{
+  background-color: #00ff00;
+}
+#cBlue{
+  background-color: #0000ff;
+}
+#cYellow{
+  background-color: #ffff00;
+}
+#cMajenta{
+  background-color: #ff00ff;
+}
+#cCyan{
+  background-color: #00ffff;
+}
