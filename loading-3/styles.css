@@ -1,0 +1,76 @@
+.loadingContainer {
+    /* border: 1px dotted black; */
+    height: 15px;
+    padding: 5px 5px 2px 0px;
+    display: inline-block;
+    position: relative;
+}
+
+.dot {
+    margin-left: 5px;
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: grey;
+    position: absolute;
+}
+
+.dot-pos1 {
+    top: 0px;
+    left: 10px;
+}
+
+.dot-pos2 {
+    top: 10px;
+    left: 20px;
+}
+
+.dot-pos3 {
+    top: 20px;
+    left: 10px;
+}
+
+.dot-pos4 {
+    top: 10px;
+    left: 0px;
+}
+
+.dot-pos5 {
+    top: 23px;
+    left: 30px;
+}
+
+.dot-anim1 {
+    /* animation: pulse 200ms ease infinite; */
+    animation: pulse 800ms ease;
+}
+
+.dot-anim2 {
+    /* animation: pulse 200ms ease 40ms infinite; */
+    animation: pulse 800ms ease 160ms;
+}
+
+.dot-anim3 {
+    /* animation: pulse 200ms ease 80ms infinite; */
+    animation: pulse 800ms ease 320ms;
+}
+
+.dot-anim4 {
+    /* animation: pulse 200ms ease 120ms infinite; */
+    animation: pulse 800ms ease 480ms;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: black;
+    }
+    100% {
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,99 @@
+.loadingContainer {
+    /* border: 1px dotted black; */
+    width: 42px;
+    height: 46px;
+    display: inline-block;
+    position: relative;
+    /* transition: transform 1s; */
+
+    animation: rotate360 2200ms ease-in-out infinite;
+}
+/* .loadingContainer:hover{
+    transform: rotate(360deg);
+} */
+
+.bg-red {
+    background-color: orange;
+}
+
+.bg-grey {
+    background-color: grey;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.dot-pos1 {
+    top: 0px;
+    left: 15px;
+}
+
+.dot-pos2 {
+    top: 10px;
+    left: 30px;
+}
+
+.dot-pos3 {
+    top: 25px;
+    left: 30px;
+}
+
+.dot-pos4 {
+    top: 35px;
+    left: 15px;
+}
+
+.dot-pos5 {
+    top: 25px;
+    left: 0px;
+}
+
+.dot-pos6 {
+    top: 10px;
+    left: 0px;
+}
+
+.dot-anim1 {
+    /* animation: pulse 200ms ease infinite; */
+    animation: pulse 1200ms ease ;
+}
+
+.dot-anim2 {
+    /* animation: pulse 200ms ease 40ms infinite; */
+    animation: pulse 1200ms ease 200ms ;
+}
+
+.dot-anim3 {
+    /* animation: pulse 200ms ease 80ms infinite; */
+    animation: pulse 1200ms ease 400ms ;
+}
+
+.dot-anim4 {
+    /* animation: pulse 200ms ease 120ms infinite; */
+    animation: pulse 1200ms ease 600ms ;
+}
+
+.dot-anim5 {
+    /* animation: pulse 200ms ease 160ms infinite; */
+    animation: pulse 1200ms ease 800ms ;
+}
+
+.dot-anim6 {
+    /* animation: pulse 200ms ease 200ms infinite; */
+    animation: pulse 1200ms ease 1000ms ;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); background-color: orangered;}
+    100% { transform: scale(1); }
+}
+
+@keyframes rotate360 {
+    100% { transform: rotate(360deg);}
+}
+
