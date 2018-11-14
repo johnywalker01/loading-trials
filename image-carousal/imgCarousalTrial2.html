@@ -1,0 +1,119 @@
+
+<html>
+
+<head>
+    <!-- <meta charset="UTF-8"> -->
+    <script>
+        function goToNext(event) {
+            // console.log("goToNext");
+            var elem = document.getElementById("grid");
+
+            // console.log("element scrollWidth " + elem.scrollWidth);
+            if (elem) {
+                var xPos = elem.scrollLeft;
+                console.log("xPos " + xPos);
+                if ((xPos + 200) < elem.scrollWidth) {
+                    elem.scrollLeft = xPos + 200;
+
+                }
+                if ((xPos + 200) >= elem.scrollWidth) {
+                    console.log("disable NEXT");
+                }
+            }
+        }
+        function goToPrev(event) {
+            // console.log("goToPrev");
+            var elem = document.getElementById("grid");
+
+            // console.log("element scrollWidth " + elem.scrollWidth);
+            if (elem) {
+                var xPos = elem.scrollLeft;
+                console.log("xPos " + xPos);
+                if (xPos > 0) {
+                    elem.scrollLeft = xPos - 200;
+                }
+
+                if (xPos <= 0) {
+                    console.log("disable PREV");
+                }
+            }
+        }
+        function checkAndReset() {
+            var elem = document.getElementById("grid");
+            var xPos = elem.scrollLeft;
+
+            if ((xPos + 200) >= elem.scrollWidth) {
+                elem.scrollLeft = 0;
+            }
+        }
+        function myFunction() {
+            var myVar = setInterval(autoTransition, 3000);
+        }
+        function autoTransition() {
+            goToNext();
+            checkAndReset();
+        }
+
+        function myStopFunction() {
+            clearInterval(myVar);
+            var interval_id = window.setInterval("", 9999); // Get a reference to the last interval +1
+            for (var i = 1; i < interval_id; i++)
+                window.clearInterval(i);//for clearing all intervals
+        }
+    </script>
+
+    <style>
+        .crop {
+            border: 5px solid #d6d6d6;
+            border-radius: 5px;
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+    
+        .op {
+            width: 200px;
+            height: 200px;
+        }
+    
+        .grid-main {
+            display: grid;
+            grid-auto-flow: column dense;
+            grid-row-gap: 5px;
+        }
+    
+        .grid-item{
+            text-align: center;
+        }
+        .grid-item img{
+            width: 180px; 
+            padding-top: 8px;
+        }
+        .btn-group{
+            width: 200px;
+            padding: 2px 5px;
+            text-align: center;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body onload="myFunction()" unload="myStopFunction()">
+    <h3> Testing Image Carousal - Auto</h3>
+    <p>Images will auto scroll, in every 3 seconds</p>
+    <div id="grid" class="grid-main crop op">
+        <div class="grid-item op">
+            <img alt="A1" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/planet-mars-space-astronomy-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A2" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/falcon-rocket-landing-land-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A3" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/spacex-helmet-space-suit-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A4" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/falcon-rocket-landing-ocean-water-256.png">
+        </div>
+    </div>
+</body>
+
+</html>

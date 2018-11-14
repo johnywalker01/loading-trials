@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- <meta charset="UTF-8"> -->
+    <script>
+        function goToNext(event) {
+            // console.log("goToNext");
+            var elem = document.getElementById("grid");
+
+            // console.log("element scrollWidth " + elem.scrollWidth);
+            if (elem) {
+                var xPos = elem.scrollLeft;
+                console.log("xPos "+xPos);
+                if ((xPos + 200) < elem.scrollWidth) {
+                    elem.scrollLeft = xPos + 200;
+                    
+                }
+                if ((xPos + 200) >= elem.scrollWidth) {
+                    console.log("disable NEXT");
+                }
+            }
+        }
+        function goToPrev(event) {
+            // console.log("goToPrev");
+            var elem = document.getElementById("grid");
+            
+            // console.log("element scrollWidth " + elem.scrollWidth);
+            if (elem) {
+                var xPos = elem.scrollLeft;
+                console.log("xPos "+xPos);
+                if (xPos > 0) {
+                    elem.scrollLeft = xPos - 200;
+                }
+
+                if (xPos <= 0) {
+                    console.log("disable PREV");
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .crop {
+            border: 5px solid #d6d6d6;
+            border-radius: 5px;
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+    
+        .op {
+            width: 200px;
+            height: 200px;
+        }
+    
+        .grid-main {
+            display: grid;
+            grid-auto-flow: column dense;
+            grid-row-gap: 5px;
+        }
+    
+        .grid-item{
+            text-align: center;
+        }
+        .grid-item img{
+            width: 180px; 
+            padding-top: 8px;
+        }
+        .btn-group{
+            width: 200px;
+            padding: 2px 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h3> Testing Image Carousal - using butons</h3>
+    <p>This HTML page is showing image carusal with css <i>grid</i> sructure and <i>scrollLeft</i></p>
+    <div id="grid" class="grid-main crop op">
+        <div class="grid-item op">
+            <img alt="A1" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/planet-mars-space-astronomy-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A2" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/falcon-rocket-landing-land-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A3" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/spacex-helmet-space-suit-256.png">
+        </div>
+        <div class="grid-item op">
+            <img alt="A4" src="https://cdn0.iconfinder.com/data/icons/free-falcon-heavy-demo-mission-1/64/falcon-rocket-landing-ocean-water-256.png">
+        </div>
+    </div>
+    <div class="btn-group">
+        <button onclick="goToPrev(event)">PREV</button>
+        <button onclick="goToNext(event)">NEXT</button>
+    </div>
+</body>
+
+</html>
