@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<title>jsdifflib demo</title>
+
+	<!-- Lib for Diff Tool -->
+	<link rel="stylesheet" type="text/css" href="styles/diffview.css" />
+	<script type="text/javascript" src="lib/diffview.js"></script>
+	<script type="text/javascript" src="lib/difflib.js"></script>
+	
+	<!-- Lib for Highlighting Tool -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+	<link rel="stylesheet" href="baseStyle.css">
+	<script src="baseScript.js"></script>
+</head>
+
+<body onunload="destroyMigs()">
+	<!-- <h1 class="top"><a href="http://github.com/cemerick/jsdifflib">jsdifflib</a> demo</h1> -->
+	<div class="hidden">
+		<strong>Context size (optional):</strong> <input type="text" id="contextSize" value="" />
+	</div>
+	<div class="textInput fontK1">
+		Select a base file <input type="file" id="baseFile" onchange="fileChangeEvent(event)">
+	</div>
+	<div class="textInput spacer fontK1">
+		Select a new file <input type="file" id="newFile" onchange="fileChangeEvent(event)">
+	</div>
+	<div class="textInput">
+		<h2>Base Text</h2>
+		<textarea id="baseText"></textarea>
+	</div>
+	<div class="textInput spacer">
+		<h2>New Text</h2>
+		<textarea id="newText"></textarea>
+	</div>
+	<div class="viewType">
+		<input type="radio" name="_viewtype" id="sidebyside" onclick="diffUsingJS(0);" /> <label for="sidebyside">Side by
+			Side Diff</label>
+		&nbsp; &nbsp;
+		<input type="radio" name="_viewtype" id="inline" onclick="diffUsingJS(1);" /> <label for="inline">Inline Diff</label>
+	</div>
+	<div>
+		<button onclick="tryHighlighting();">Colour Me</button>
+	</div>
+	<div id="diffoutput"> </div>
+</body>
+
+</html>
