@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accordion Trials</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="onload()">
+
+    <div class="filter-facet-container">
+        <div class="issues-filters-header">
+            <div class="pull-right">
+                <button class="button-red">Clear All Filters</button>
+            </div>
+            <h3>Filters</h3>
+        </div>
+        <div class="issues-filter-facet-header">
+            <h4>Display Mode</h4>
+            <div class="twin-flex-box">
+                <a class="dm-flex-item modeOn" href="#">Issues</a>
+                <a class="dm-flex-item modeOff" href="#">Effort</a>
+            </div>
+        </div>
+
+        <button class="accordion">Type</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Bug</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Vulnerability</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Code Smell</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Severity</button>
+        <div class="panel">
+            <div class="stereoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Blocker</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Minor</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Critical</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Info</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Major</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Resolution</button>
+        <div class="panel">
+            <div class="stereoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Unresolved</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Fixed</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">False Positive</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Won't fix</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Removed</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Status</button>
+        <div class="panel">
+            <div class="stereoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Open</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Resolved</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Reopened</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Closed</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Confirmed</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Creation Date</button>
+        <div class="panel">
+            <div class="stereoCDateFlex">
+                <div>
+                    <input class="stereoCFlexDate" type="date">
+                </div>
+                <div>
+                    <input class="stereoCFlexDate" type="date">
+                </div>
+            </div>
+            <div style="display: inline-block; padding: 3px 5px;">
+                <a class="cd-flex-item modeOn" href="#">All</a>
+                <a class="cd-flex-item modeOff" href="#">Leak Period</a>
+            </div>
+        </div>
+
+        <button class="accordion">Rule</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem flexRow">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name" title="Standard outputs should not be used directly to log anything">Standard outputs should not be used directly to log anything</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <input class="filterFacetSrch" type="text" placeholder="Search..">
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Tag</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Bad-practice</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">cert</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <input class="filterFacetSrch" type="text" placeholder="Search..">
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Module</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Project-title</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Directory</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">directory</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">File</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">File.java</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Assignee</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Not assigned</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <input class="filterFacetSrch" type="text" placeholder="Search..">
+                </div>
+            </div>
+        </div>
+
+        <button class="accordion">Author</button>
+        <div class="panel">
+
+        </div>
+
+        <button class="accordion">Language</button>
+        <div class="panel">
+            <div class="monoCFlex">
+                <div>
+                    <button class="filterBtnItem">
+                        <span class="facet-icon"></span>
+                        <span class="facet-name">Java</span>
+                        <span class="facet-stat">0</span>
+                    </button>
+                </div>
+                <div>
+                    <input class="filterFacetSrch" type="text" placeholder="Search..">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
