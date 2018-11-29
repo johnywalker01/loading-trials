@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visualization Trials</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="onload()">
+    <div class="sonar-vis-mainContainer">
+        <div class="vis-nav-tree">
+            <div class="img-box" onclick="toggleItem(this);">
+                <span class="fa-ra-icon"></span>
+                <span class="fa-heading">Reports</span>
+            </div>
+            <div class="panel">
+                <div class="monoCFlex">
+                    <div id="report-1" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Summary of issue code for each analysis results of the last 10 cases.">
+                            Summary of issue code
+                        </div>
+                    </div>
+                    <div id="report-2" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Summary of status for each analysis results of the last 10 cases.">
+                            Summary of status
+                        </div>
+                    </div>
+                    <div id="report-3" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Summary of severity for each analysis results of the last 10 cases.">
+                            Summary of severity
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="img-box" onclick="toggleItem(this);">
+                <span class="fa-ra-icon"></span>
+                <span class="fa-heading">Graphs</span>
+            </div>
+            <div class="panel">
+                <div class="monoCFlex">
+                    <div id="graph-1" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Top 10 of code in the latest analysis results.">
+                            Top 10 of code - pie chart
+                        </div>
+                    </div>
+                    <div id="graph-2" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Aggregation of states for each analysis results of the last 10 cases.">
+                            Aggregation of stauts - bar chart
+                        </div>
+                    </div>
+                    <div id="graph-3" class="fa-list-item" onclick="toggleListItem(this);">
+                        <div class="facet-icon"></div>
+                        <div class="facet-name" title="Aggregation of states for each analysis results of the last 10 cases.">
+                            Aggregation of states - stacked bar chart
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vis-contents">
+            <h3 id="selectedListItemName">Dynamic Name</h3>
+            <span>Type</span>
+            <select>
+                <option value="optionA">Option A</option>
+                <option value="optionB">Option B</option>
+                <option value="optionC">Option C</option>
+            </select>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        </div>
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+.img-box {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    /* background-color: rgb(158, 175, 255); */
+}
+
+.fa-ra-icon {
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin: 2px 0;
+    background: transparent url(images/arrow_right_16.png) no-repeat 0px 0px;
+    transition: 400ms;
+}
+
+.active {
+    transform: rotate(90deg);
+    transform-origin: center center;
+}
+
+.fa-heading {
+    float: left;
+    cursor: default;
+}
+.fa-list-item{
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin: 2px 0;
+}
+.fa-list-item:hover{
+    border: 1px solid #236a97;
+}
+
+
+/* .accordion {
+    display: flex;
+    width: 100%;
+    color: #444;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+.active, .accordion:hover {
+    color: #236a97;
+}
+
+.accordion::before {
+    content: '\27A7';
+    color: #777;
+    font-weight: bold;
+    float: left;
+    padding: 5px 0 0 4px;
+    width: 20px;
+    height: 20px;
+    transition: 400ms;
+}
+
+.active::before {
+    content: '\27A7';
+    transform: rotate(90deg);
+    transform-origin: center center;
+} */
+
+.panel {
+    margin-bottom: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.facet-icon {
+    float: left;
+    height: 19px;
+    width: 20px;
+    background: transparent url(images/grid_16.png) no-repeat 2px 2px;
+}
+
+.facet-stat {
+    float: right;
+}
+
+.facet-name {
+    padding: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.monoCFlex {
+    display: flex;
+    flex-direction: column;
+}
+
+.monoCFlex>div {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.filterBtnItem {
+    margin: 0px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #444;
+    padding: 2px 3px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 12px;
+    border: 1px solid transparent;
+}
+
+.filterBtnItem:hover {
+    border: 1px solid #236a97;
+    border-radius: 3px;
+}
+
+.faBtn {
+    float: left;
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 8px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-weight: bold;
+}
