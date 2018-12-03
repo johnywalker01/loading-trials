@@ -7,77 +7,76 @@
     <title>Visualization Trials</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
+    <script src="chartjs-scripts/chart.bundle.js"></script>
+    <script src="chartjs-scripts/utils.js"></script>
+
 </head>
 
-<body onload="onload()">
+<body onload="startOnload();">
     <div class="sonar-vis-mainContainer">
         <div class="vis-nav-tree">
-            <div class="img-box" onclick="toggleItem(this);">
-                <span class="fa-ra-icon"></span>
-                <span class="fa-heading">Reports</span>
+            <div>
+                <span class="faH4">Display Mode</span>
+                <div class="faRowFlex">
+                    <button class="faBlueBtn faRowFlexItem" onclick="togglePanels(this,'report')">Report</button>
+                    <button class="faBlueBtn faRowFlexItem" onclick="togglePanels(this,'graph')">Graph</button>
+                </div>
             </div>
-            <div class="panel">
-                <div class="monoCFlex">
-                    <div id="report-1" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Summary of issue code for each analysis results of the last 10 cases.">
-                            Summary of issue code
-                        </div>
+            <div id="panelReport" class="monoCFlex panel">
+                <div>
+                    <div class="faListItemBtn">
+                        <span class="faListItemName">Summary of issue code</span>
+                        <span class="faListItemIcon"></span>
                     </div>
-                    <div id="report-2" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Summary of status for each analysis results of the last 10 cases.">
-                            Summary of status
-                        </div>
+                </div>
+                <div>
+                    <div class="faListItemBtn">
+                        <span class="faListItemName">Summary of status</span>
+                        <span class="faListItemIcon"></span>
                     </div>
-                    <div id="report-3" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Summary of severity for each analysis results of the last 10 cases.">
-                            Summary of severity
-                        </div>
+                </div>
+                <div>
+                    <div class="faListItemBtn">
+                        <span class="faListItemName">Summary of severity</span>
+                        <span class="faListItemIcon"></span>
                     </div>
                 </div>
             </div>
-
-            <div class="img-box" onclick="toggleItem(this);">
-                <span class="fa-ra-icon"></span>
-                <span class="fa-heading">Graphs</span>
-            </div>
-            <div class="panel">
-                <div class="monoCFlex">
-                    <div id="graph-1" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Top 10 of code in the latest analysis results.">
-                            Top 10 of code - pie chart
-                        </div>
+            <div id="panelGraph" class="monoCFlex panel">
+                <div>
+                    <div id="graph-1" class="faListItemBtn" onclick="toggleListItem(this);">
+                        <span class="faListItemName">Top 10 Open Issues</span>
+                        <span class="faListItemIcon pieChart"></span>
                     </div>
-                    <div id="graph-2" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Aggregation of states for each analysis results of the last 10 cases.">
-                            Aggregation of stauts - bar chart
-                        </div>
+                </div>
+                <div>
+                    <div id="graph-2" class="faListItemBtn" onclick="toggleListItem(this);">
+                        <span class="faListItemName">Status By Registartion Number</span>
+                        <span class="faListItemIcon barChart"></span>
                     </div>
-                    <div id="graph-3" class="fa-list-item" onclick="toggleListItem(this);">
-                        <div class="facet-icon"></div>
-                        <div class="facet-name" title="Aggregation of states for each analysis results of the last 10 cases.">
-                            Aggregation of states - stacked bar chart
-                        </div>
+                </div>
+                <div>
+                    <div id="graph-3" class="faListItemBtn" onclick="toggleListItem(this);">
+                        <span class="faListItemName">State By Registartion Number</span>
+                        <span class="faListItemIcon stackedBarChart"></span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="vis-contents">
-            <h3 id="selectedListItemName">Dynamic Name</h3>
-            <span>Type</span>
-            <select>
-                <option value="optionA">Option A</option>
-                <option value="optionB">Option B</option>
-                <option value="optionC">Option C</option>
-            </select>
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <div class="graphContainer">
+                <!-- <div class="graphBtnBox">
+                    <button id="randomizeData">Randomize Data</button>
+                </div> -->
+                <div class="graphCanvasBox">
+                    <canvas id="chart-area-pie" class="tg1"></canvas>
+                    <canvas id="chart-area-bar" class="tg1" ></canvas>
+                    <canvas id="chart-area-stackedBar" class="tg1" ></canvas>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="chartjsExtScripts.js"></script>
 </body>
 
 </html>

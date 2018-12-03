@@ -1,0 +1,83 @@
+
+.faRowFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.faH4 {
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.faBlueBtn {
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: border-color .2s ease;
+    margin: 5px 10px;
+    height: 20px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.faBlueBtn:hover {
+    border: 1px solid #236a97;
+}
+
+.faRowFlexItem {
+    flex: 1 0 30px;
+}
+
+.faListItemBtn {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    margin: 1px 2px;
+    cursor: pointer;
+    transition: border-color .2s ease;
+}
+
+.faListItemBtn:hover {
+    border: 1px solid #236a97;
+}
+
+.faListItemIcon {
+    float: right;
+    height: 19px;
+    width: 20px;
+}
+
+.pieChart {
+    background: transparent url(images/pie_chart_16.png) no-repeat 0px 2px;
+}
+
+.barChart {
+    background: transparent url(images/bar_chart_16.png) no-repeat 0px 2px;
+}
+
+.stackedBarChart {
+    background: transparent url(images/stacked_bar_chart_16.png) no-repeat 0px 2px;
+}
+
+.faListItemName {
+    padding: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.panel {
+    padding: 0 2px;
+    background-color: #eee;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.active {
+    font-weight: 600;
+    color: white;
+    background-color: #236a97;
+}
