@@ -1,0 +1,35 @@
+.img-box {
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    border: 1px solid;
+}
+
+.fa-ra-icon {
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin: 2px 0;
+    background: transparent url(images/arrow_right_16.png) no-repeat 0px 0px;
+    transition: 400ms;
+}
+.active{
+    transform: rotate(90deg);
+    transform-origin: center center;
+}
+.fa-action-btn{
+    float: right;
+    text-decoration: none;
+    outline: none;
+    background: transparent;
+    border: 1px solid #d4333f;
+    box-sizing: border-box;
+    border-radius: 2px;
+    cursor: pointer;
+    color: #d4333f;
+    transition: border-color 300ms ease-in-out;
+}
+.fa-action-btn:hover{
+    color: white;
+    background-color: #d4333f;
+}
