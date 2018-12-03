@@ -63,3 +63,6 @@ function accordionCreationDate() {
         }
     }
 }
+function doFacetClear(){
+    console.log("Clear");
+}
