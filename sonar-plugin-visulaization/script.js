@@ -1,35 +1,17 @@
-// function onload() {
-//     // accordionAlgo();
-//     // accordionDisplayMode();
-//     // accordionCreationDate();
-// }
-
-// function toggleItem(e) {
-//     var imgChildren = e.children;
-//     imgChildren[0].classList.toggle("active");
-
-//     var panel = e.nextElementSibling;
-//     if (panel.style.maxHeight) {
-//         panel.style.maxHeight = null;
-//     } else {
-//         panel.style.maxHeight = panel.scrollHeight + "px";
-//     }
-//     if (panel.style.marginBottom) {
-//         panel.style.marginBottom = null;
-//     } else {
-//         panel.style.marginBottom = "5px";
-//     }
-// }
-
 function startOnload() {
-    updateGraphTypeView('graph-1');
+    // TODO
 }
 
 function toggleListItem(eve) {
-    console.log("match found " + eve.id);
-    // document.getElementById("selectedListItemName").innerText = eve.innerText;
-
+    // console.log("match found " + eve.id);
     updateGraphTypeView(eve.id);
+    if (eve.id.includes("graph")) {
+        hideCanvas("graphContainer", false);
+        hideCanvas("reportContainer", true);
+    } else if (eve.id.includes("report")) {
+        hideCanvas("graphContainer", true);
+        hideCanvas("reportContainer", false);
+    }
 }
 
 function updateGraphTypeView(graphType) {

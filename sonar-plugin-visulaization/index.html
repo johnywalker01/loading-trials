@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Visualization Trials</title>
+    <title>Visualization</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <script src="chartjs-scripts/chart.bundle.js"></script>
@@ -24,19 +24,19 @@
             </div>
             <div id="panelReport" class="monoCFlex panel">
                 <div>
-                    <div class="faListItemBtn">
+                    <div id="report-1" class="faListItemBtn" onclick="toggleListItem(this);">
                         <span class="faListItemName">Summary of issue code</span>
                         <span class="faListItemIcon"></span>
                     </div>
                 </div>
                 <div>
-                    <div class="faListItemBtn">
+                    <div id="report-2" class="faListItemBtn" onclick="toggleListItem(this);">
                         <span class="faListItemName">Summary of status</span>
                         <span class="faListItemIcon"></span>
                     </div>
                 </div>
                 <div>
-                    <div class="faListItemBtn">
+                    <div id="report-3" class="faListItemBtn" onclick="toggleListItem(this);">
                         <span class="faListItemName">Summary of severity</span>
                         <span class="faListItemIcon"></span>
                     </div>
@@ -64,15 +64,186 @@
             </div>
         </div>
         <div class="vis-contents">
-            <div class="graphContainer">
-                <!-- <div class="graphBtnBox">
-                    <button id="randomizeData">Randomize Data</button>
-                </div> -->
-                <div class="graphCanvasBox">
-                    <canvas id="chart-area-pie" class="tg1"></canvas>
-                    <canvas id="chart-area-bar" class="tg1" ></canvas>
-                    <canvas id="chart-area-stackedBar" class="tg1" ></canvas>
-                </div>
+            <div id="graphContainer" class="graphyte">
+                <canvas id="chart-area-pie" class="tg1"></canvas>
+                <canvas id="chart-area-bar" class="tg1"></canvas>
+                <canvas id="chart-area-stackedBar" class="tg1"></canvas>
+            </div>
+            <div id="reportContainer" class="reporteen">
+                <table class="testgrid" id="tableid">
+                    <thead>
+                        <tr>
+                            <th class="editablegrid-name" data-title="NAME"><a style="cursor: pointer;">NAME</a></th>
+                            <th class="editablegrid-firstname" data-title="FIRSTNAME"><a style="cursor: pointer;">FIRSTNAME</a>&nbsp;<img
+                                    src="http://www.editablegrid.net/templates/editablegrid_2015/js/editablegrid/images/bullet_arrow_up.png"></th>
+                            <th class="number editablegrid-age" data-title="AGE"><a style="cursor: pointer;">AGE</a>&nbsp;&nbsp;<a
+                                    href="javascript:alert('The age must be an integer between 16 and 99');"><i class="fa fa-info"></i></a></th>
+                            <th class="number editablegrid-height" data-title="HEIGHT"><a style="cursor: pointer;">HEIGHT</a>&nbsp;&nbsp;<a
+                                    href="javascript:alert('The height is given in meters');"><i class="fa fa-info"></i></a></th>
+                            <th class="editablegrid-country" data-title="COUNTRY"><a style="cursor: pointer;">COUNTRY</a></th>
+                            <th class="editablegrid-email" data-title="EMAIL"><a style="cursor: pointer;">EMAIL</a>&nbsp;&nbsp;<a
+                                    href="javascript:alert('Note the validator used automatically when you specify your column as being of type email');"><i
+                                        class="fa fa-info"></i></a></th>
+                            <th class="boolean editablegrid-freelance" data-title="FREELANCE"><a style="cursor: pointer;">FREELANCE</a>&nbsp;&nbsp;<a
+                                    href="javascript:alert('This column tells if the person works as a freelance or as an employee');"><i
+                                        class="fa fa-info"></i></a></th>
+                            <th class="editablegrid-lastvisit" data-title="LAST VISIT"><a style="cursor: pointer;">LAST VISIT</a></th>
+                            <th class="editablegrid-action" data-title="action">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="DemoGrid_57">
+                            <td class="editablegrid-name" data-title="NAME">Calderon</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Harding</td>
+                            <td class="number editablegrid-age" data-title="AGE">57</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,15 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/fr.png"
+                                    alt="fr"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:Fusce@congue.com">Fusce@congue.com</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">14 Feb 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(190);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(190);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_422">
+                            <td class="editablegrid-name" data-title="NAME">Vaughn</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Harlan</td>
+                            <td class="number editablegrid-age" data-title="AGE">41</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,68 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/zw.png"
+                                    alt="zw"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:tempor.lorem@egestasDuisac.com">tempor.lorem@egestasDuisac.com</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">2 Jul 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(191);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(191);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_107">
+                            <td class="editablegrid-name" data-title="NAME">Morris</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Harriet</td>
+                            <td class="number editablegrid-age" data-title="AGE">24</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,35 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/us.png"
+                                    alt="us"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:eleifend@euismodestarcu.co.uk">eleifend@euismodestarcu.co.uk</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">7 Apr 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(192);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(192);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_100">
+                            <td class="editablegrid-name" data-title="NAME">Munoz</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Harrison</td>
+                            <td class="number editablegrid-age" data-title="AGE">84</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,72 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/fr.png"
+                                    alt="fr"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:eu.ultrices@nisiAenean.org">eu.ultrices@nisiAenean.org</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">9 Aug 2011</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(193);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(193);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_44">
+                            <td class="editablegrid-name" data-title="NAME">Fuentes</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Hasad</td>
+                            <td class="number editablegrid-age" data-title="AGE">40</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,82 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/be.png"
+                                    alt="be"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:lobortis.mauris.Suspendisse@fringilla.co.uk">lobortis.mauris.Suspendisse@fringilla.co.uk</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">26 Mar 2011</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(194);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(194);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_24">
+                            <td class="editablegrid-name" data-title="NAME">Wiggins</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Hayfa</td>
+                            <td class="number editablegrid-age" data-title="AGE">40</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,65 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/fr.png"
+                                    alt="fr"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:est.Nunc@velitegestas.edu">est.Nunc@velitegestas.edu</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">21 Jun 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(195);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(195);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_466">
+                            <td class="editablegrid-name" data-title="NAME">Hodge</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Hayfa</td>
+                            <td class="number editablegrid-age" data-title="AGE">27</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,02 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/nl.png"
+                                    alt="nl"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:enim.sit.amet@enimdiam.co.uk">enim.sit.amet@enimdiam.co.uk</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">12 Jan 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(196);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(196);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_233">
+                            <td class="editablegrid-name" data-title="NAME">Neal</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Hedwig</td>
+                            <td class="number editablegrid-age" data-title="AGE">27</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,34 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/uk.png"
+                                    alt="uk"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:mollis.vitae@sit.edu">mollis.vitae@sit.edu</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">22 Jul 2011</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(197);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(197);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_299">
+                            <td class="editablegrid-name" data-title="NAME">Hogan</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Hedy</td>
+                            <td class="number editablegrid-age" data-title="AGE">36</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,45 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/be.png"
+                                    alt="be"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:interdum.Curabitur.dictum@nequeetnunc.edu">interdum.Curabitur.dictum@nequeetnunc.edu</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">29 Jul 2012</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(198);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(198);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                        <tr id="DemoGrid_127">
+                            <td class="editablegrid-name" data-title="NAME">Stevens</td>
+                            <td class="editablegrid-firstname" data-title="FIRSTNAME">Heidi</td>
+                            <td class="number editablegrid-age" data-title="AGE">88</td>
+                            <td class="number editablegrid-height" data-title="HEIGHT">1,26 m</td>
+                            <td class="editablegrid-country" data-title="COUNTRY" style="text-align: center;"><img src="images/flags/uk.png"
+                                    alt="uk"></td>
+                            <td class="editablegrid-email" data-title="EMAIL"><a href="mailto:risus@sapienmolestieorci.net">risus@sapienmolestieorci.net</a></td>
+                            <td class="editablegrid-freelance boolean" data-title="FREELANCE"><input type="checkbox"></td>
+                            <td class="editablegrid-lastvisit" data-title="LAST VISIT" style="white-space: nowrap;">28 Jan 2011</td>
+                            <td class="editablegrid-action" data-title="action"><a onclick="if (confirm('Are you sure you want to delete this person ? ')) { editableGrid.remove(199);  } "
+                                    style="cursor:pointer"><i class="fa fa-trash" alt="delete" title="Delete row"></i></a>&nbsp;<a
+                                    onclick="editableGrid.duplicate(199);" style="cursor:pointer"><i class="fa fa-files-o" border="0"
+                                        alt="duplicate" title="Duplicate row"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
