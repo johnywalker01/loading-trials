@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8">
+    <title>Three.js Trials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        // const imageSrc = 'assets/1.png';
+        const imageSrc = 'https://images.techhive.com/images/article/2016/10/firefox-logo-100690302-large.jpg';
+
+        let scene = new THREE.Scene();
+        let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight);
+        let renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        let element = document.getElementById("container");
+        element.appendChild(renderer.domElement);
+
+        let geometry = new THREE.BoxGeometry(1, 1, 1);
+
+        // let texture = new THREE.TextureLoader().load(imageSrc);
+
+        // immediately use the texture for material creation
+        // let material = new THREE.MeshBasicMaterial({
+        //     map: texture
+        // });
+        // let material = new THREE.MeshBasicMaterial({
+        //     color: 0xff0000, wireframe:true
+        // });
+        // let cubeMaterials = [
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        //     new THREE.MeshBasicMaterial({ map:new THREE.TextureLoader().load(imageSrc),side:THREE.DoubleSide}),
+        // ];
+        // let cubeMaterials = [{
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     },
+        //     {
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     },
+        //     {
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     },
+        //     {
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     },
+        //     {
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     },
+        //     {
+        //         map: new THREE.TextureLoader().load(imageSrc),
+        //         side: THREE.DoubleSide
+        //     }
+        // ];
+        let cubeMaterials = [{
+                color: 0xff0000, side:0
+            },
+            {
+                color: 0x00ff00, side:1
+            },
+            {
+                color: 0x0000ff, side:2
+            },
+            {
+                color: 0xAAFF00, side:3
+            },
+            {
+                color: 0xff0000, side:4
+            },
+            {
+                color: 0xAA00ff, side:5
+            }
+        ];
+        let material = new THREE.MeshBasicMaterial(cubeMaterials);
+
+        let cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        cube.position.z = -3;
+        cube.rotation.x = 10;
+        cube.rotation.y = 0;
+
+        // renderer.render(scene, camera);
+
+        var animate = function () {
+            // cube.rotation.x += 0.01;
+            cube.rotation.y += 0.02;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+
+</html>
