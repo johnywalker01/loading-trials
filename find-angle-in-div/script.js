@@ -16,13 +16,14 @@ var clickAngle = null;
 var csImage = new Image;
 
 function onBodyLoad() {
-    csImage.src = 'http://www.biobest.co.uk/assets/images/home/blood-samples-web.jpg';
+    // csImage.src = 'http://www.biobest.co.uk/assets/images/home/blood-samples-web.jpg';
 
     // setup canvas
     model.cnv = document.getElementById('myCanvas');
     model.context = model.cnv.getContext('2d');
 
-    rotateShape(model.angle); // display the rectangle/square
+    initImage();
+
     offX = model.cnv.offsetLeft;
     offY = model.cnv.offsetTop;
 
@@ -30,7 +31,7 @@ function onBodyLoad() {
 }
 
 // init canvas
-function rotateShape(ang) {
+function updateShape(ang) {
     model.context.clearRect(0, 0, 300, 300);
     model.cnv.width = model.cnv.width;
 
@@ -45,9 +46,18 @@ function rotateShape(ang) {
     // console.log('center X ' + cX + '\tcenterY ' + cY);
     model.context.translate(x + 0.5 * width, y + 0.5 * height);
     model.context.rotate(ang);
-    model.context.fillStyle = model.bgColor;
-    model.context.fillRect(-0.5 * width, -0.5 * height, width, height);
-    // model.context.drawImage(this.csImage, -0.5 * width, -0.5 * height, width, height);
+    // model.context.fillStyle = model.bgColor;
+    // model.context.fillRect(-0.5 * width, -0.5 * height, width, height);
+    model.context.drawImage(this.csImage, -0.5 * width, -0.5 * height, width, height);
+}
+/** 
+ * load image to a global variable then, it will be loading to the canvas. 
+ * */
+function initImage() {
+    csImage.onload = function () {
+        updateShape(model.angle);
+    };
+    csImage.src = 'http://www.biobest.co.uk/assets/images/home/blood-samples-web.jpg';
 }
 
 function mousedown(event) {
@@ -61,7 +71,7 @@ function mousemove(event) {
     if (clickAngle != null) {
         model.angle = (getAngle(cX + offX, cY + offY, event.clientX, event.clientY) - clickAngle);
         // console.log("model.angle " + model.angle);
-        rotateShape(model.angle);
+        updateShape(model.angle);
     } else {
         model.cnv.className = 'grab';
     }

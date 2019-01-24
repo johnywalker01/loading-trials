@@ -1,15 +1,25 @@
-#myCanvas{
+#myCanvas {
     border: 4px solid rgb(231, 231, 231);
     border-radius: 6px;
 }
-.grab{
+
+.grab {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: -o-grab;
+    cursor: -ms-grab;
     cursor: grab;
 }
-.grabbing{
+
+.grabbing {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: -o-grabbing;
+    cursor: -ms-grabbing;
     cursor: grabbing;
 }
 
-#myD{
+#myD {
     width: 100px;
     height: 100px;
     border: 2px solid rgb(231, 231, 231);
