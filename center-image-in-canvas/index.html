@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas Trials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="onBodyLoad()">
+    <h2>Centering the image in the canvas</h2>
+    <br>
+    <canvas id="myCanvas" width="600" height="380"></canvas>
+    <br>
+    Width (200 - 2000): <input id="widthInput" type="number" name="width" min="200" max="2000" value="400">
+    Height (200 - 2000): <input id="heightInput" type="number" name="height" min="200" max="2000" value="200">
+    <button onclick="resizeCanvas()">Resize</button>
+
+</body>
+
+</html>
