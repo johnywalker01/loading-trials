@@ -5,7 +5,8 @@ var model = {
     height: 150,
     x: 10,
     y: 10,
-    bgColor: "#ff00aa"
+    bgColor: "#ff6633",
+    scalingFactor: 1.01
 };
 
 // offset position of canvas
@@ -16,6 +17,9 @@ var lastX, lastY;
 var clickPoint = null;
 // contains the image to display in canvas
 var csImage = new Image;
+
+var powFactor = 1;
+var lastStoppedYvalue = 0;
 
 // Constructor function for Point objects
 function Point(xAxix, yAxis) {
@@ -29,6 +33,7 @@ function onBodyLoad() {
     model.context = model.cnv.getContext('2d');
 
     initImage();
+    // updateShape(model.scalingFactor);
 
     offX = model.cnv.offsetLeft;
     offY = model.cnv.offsetTop;
@@ -39,22 +44,41 @@ function onBodyLoad() {
  * */
 function initImage() {
     csImage.onload = function () {
-        updateShape(new Point(model.x, model.y));
+        updateShape(model.scalingFactor);
     };
     csImage.src = 'http://www.biobest.co.uk/assets/images/home/blood-samples-web.jpg';
 }
 
-function updateClickPoint(event) {
-    lastX = event.offsetX || (event.pageX - this.offX);
-    lastY = event.offsetY || (event.pageY - this.offY);
-    clickPoint = new Point(lastX, lastY);
+function updateClickPoint(event, resetToNull = false) {
+    if (!resetToNull) {
+        lastX = event.offsetX || (event.pageX - this.offX);
+        lastY = event.offsetY || (event.pageY - this.offY);
+        clickPoint = new Point(lastX, lastY);
+        restartingZoom = true;
+    } else {
+        lastStoppedYvalue = powFactor;
+        // console.log('model.lastStoppedYvalue\t' + model.lastStoppedYvalue);
+        clickPoint = null;
+    }
+
 }
 
+function getZoomValue(nX, nY) {
+    let updatedX = clickPoint.xAxis - nX;
+    let updatedY = clickPoint.yAxis - nY;
+    // console.log('updatedX ' + updatedX + '\tupdatedY ' + updatedY);
 
-function getPanValue(nX, nY) {
-    let updatedX = nX - lastX;
-    let updatedY = nY - lastY;
-    return new Point(model.x += updatedX, model.y += updatedY);
+    powFactor = lastStoppedYvalue + updatedY;
+    // console.log('powering Factor ' + powFactor );
+    let zoomVal = Math.pow(model.scalingFactor, powFactor);
+    return zoomVal;
+
+    // if (updatedY < 0) {
+    //     // console.log('DOWN');
+    // } else if (updatedY > 0) {
+    //     // console.log('UP');
+    // }
+
 }
 
 function mousedown(event) {
@@ -65,10 +89,10 @@ function mousedown(event) {
 function mousemove(event) {
     let newX = event.offsetX || (event.pageX - this.offX);
     let newY = event.offsetY || (event.pageY - this.offY);
-    // calculate move angle minus the angle onclick
+
     if (clickPoint != null) {
-        let panValue = getPanValue(newX, newY);
-        updateShape(panValue);
+        let zoomValue = getZoomValue(newX, newY);
+        updateShape(zoomValue);
 
         lastX = newX;
         lastY = newY;
@@ -79,24 +103,27 @@ function mousemove(event) {
 
 function mouseup(event) {
     model.cnv.className = 'grab';
-    clickPoint = null;
+    updateClickPoint(event, true);
 }
 
 /**
  * update canvas with shape or image
  */
-function updateShape(point) {
+function updateShape(zoomValue) {
     model.context.clearRect(0, 0, model.cnv.width, model.cnv.height);
+    // this is important.
     model.cnv.width = model.cnv.width;
 
+    var x = model.x;
+    var y = model.y;
     var width = model.width;
     var height = model.height;
 
-    model.context.setTransform(1, 0, 0, 1, 0, 0);
+    let dx = x + 0.5 * width;
+    let dy = y + 0.5 * height;
 
-    let dx = point.xAxis + 0.5 * width;
-    let dy = point.yAxis + 0.5 * height;
-    model.context.translate(dx, dy);
+    // console.log('zoomValue ' + zoomValue);
+    model.context.setTransform(zoomValue, 0, 0, zoomValue, dx, dy);
     // model.context.fillStyle = model.bgColor;
     // model.context.fillRect(-0.5 * width, -0.5 * height, width, height);
     model.context.drawImage(this.csImage, -0.5 * width, -0.5 * height, width, height);
