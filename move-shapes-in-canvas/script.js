@@ -53,7 +53,7 @@ function onBodyLoad() {
 		isResizing: false
 	});
 	shapes.push({
-		x: 200,
+		x: 210,
 		y: 100,
 		r: 40,
 		type: "circle",
@@ -78,6 +78,38 @@ function onBodyLoad() {
 		width: 70,
 		height: 90,
 		type: "ellipse",
+		stroke: "#0d5ddd",
+		isDragging: false,
+		isResizing: false
+	});
+
+	// define 3 lines
+	shapes.push({
+		x1: 40,
+		y1: 180,
+		x2: 70,
+		y2: 220,
+		type: "line",
+		stroke: "#0d5ddd",
+		isDragging: false,
+		isResizing: false
+	});
+	shapes.push({
+		x1: 150,
+		y1: 95,
+		x2: 150,
+		y2: 425,
+		type: "line",
+		stroke: "#0d5ddd",
+		isDragging: false,
+		isResizing: false
+	});
+	shapes.push({
+		x1: 150,
+		y1: 200,
+		x2: 300,
+		y2: 200,
+		type: "line",
 		stroke: "#0d5ddd",
 		isDragging: false,
 		isResizing: false
@@ -113,6 +145,17 @@ function circle(shape) {
 	ctx.arc(shape.x, shape.y, shape.r, 0, Math.PI * 2);
 	ctx.closePath();
 	ctx.stroke();
+}
+
+// draw a single rect
+function line(shape) {
+	ctx.strokeStyle = shape.stroke;
+	ctx.beginPath();
+	ctx.moveTo(shape.x1, shape.y1);
+	ctx.lineTo(shape.x2, shape.y2);
+	ctx.stroke();
+
+	drawLineDots(shape);
 }
 
 // draw a single ellipse
@@ -174,6 +217,32 @@ function drawCenterPoint(shape) {
 }
 
 // draw dots on rect points
+function drawLineDots(shape) {
+	// let dot1 = {
+	// 	x: shape.x1,
+	// 	y: shape.y1,
+	// 	r: dotRadius,
+	// 	fill: "#f7660c",
+	// 	isDragging: false,
+	// 	isResizing: false
+	// }
+	let dot2 = {
+		x: shape.x2,
+		y: shape.y2,
+		r: dotRadius,
+		fill: "#f7660c",
+		isDragging: false,
+		isResizing: false
+	}
+	ctx.fillStyle = dot2.fill;
+	ctx.beginPath();
+	// ctx.arc(dot1.x, dot1.y, dot1.r, 0, Math.PI * 2);
+	ctx.arc(dot2.x, dot2.y, dot2.r, 0, Math.PI * 2);
+	ctx.closePath();
+	ctx.fill();
+}
+
+// draw dots on rect points
 function drawDots(shape) {
 	let dot = {
 		x: shape.x,
@@ -216,6 +285,8 @@ function draw() {
 			rect(shapes[i]);
 		} else if (shapes[i].width && shapes[i].type == "ellipse") {
 			ellipse(shapes[i]);
+		} else if (shapes[i].type == "line") {
+			line(shapes[i]);
 		} else {
 			circle(shapes[i]);
 		};
@@ -261,7 +332,20 @@ function myDown(e) {
 				s.isDragging = true;
 				break;
 			}
+		} else if (s.type == 'line') {
+			if (isOnLineCorner(mx, my, s)) {
+				// if yes, set that rects isResizing=true
+				resizeOk = true;
+				s.isResizing = true;
+				break;
+			} else if (isOnLine(mx, my, s)) {
+				// if yes, set that rects isDragging=true
+				dragok = true;
+				s.isDragging = true;
+				break;
+			}
 		}
+
 		// test if the mouse is on the corners of this circle
 		else {
 			var dx = s.x - mx;
@@ -284,6 +368,57 @@ function myDown(e) {
 	// save the current mouse position
 	startX = mx;
 	startY = my;
+}
+
+function isOnLine(mx, my, s) {
+	let inside = false;
+	const pf = 5;
+	console.log('mx  my\t\t' + mx + '\t' + my)
+	console.log('s.x1   s.y1\t' + s.x1 + '\t' + s.y1)
+	console.log('s.x2   s.y2\t' + s.x2 + '\t' + s.y2)
+
+	try {
+		// vertical line
+		if (s.x2 - s.x1 == 0) {
+			if (mx > s.x1 - pf && mx < s.x1 + pf &&
+				my > s.y1 - pf && my < s.y2 + pf) {
+				// console.log("HURAYYY!!! I'm on LINE  with XXX")
+				inside = true;
+			}
+		}
+		// horizontal line
+		else if (s.y2 - s.y1 == 0) {
+			if (my > s.y1 - pf && my < s.y1 + pf &&
+				mx > s.x1 - pf && mx < s.x2 + pf) {
+				// console.log("HURAYYY!!! I'm on LINE  with YYY")
+				inside = true;
+			}
+		} else {
+			for (let fact = -pf; fact < pf; fact++) {
+				let m = (s.y2 + fact - s.y1 + fact) / (s.x2 + fact - s.x1 + fact);
+				let calY = Math.floor(m * (mx - s.x1 + fact) + s.y1 + fact);
+				if (mx > s.x1 - pf && mx < s.x2 + pf && my > s.y1 - pf && my < s.y2 + pf &&
+					my == calY) {
+					console.log("HURAYYY!!! I'm on the slope and I'm ready to move")
+					inside = true;
+				}
+
+			}
+			// let calX = Math.floor((my - s.y1) / m + s.x1);
+			// // console.log("m " + m + "   calY " + calY + "   calX " + calX)
+			// if (mx > s.x1 - pf && mx < s.x2 + pf && my > s.y1 - pf && my < s.y2 + pf &&
+			// 	(calY == my || (calY > my - pf && calY < my + pf)) ||
+			// 	(calX == mx || (calX > mx - pf && calX < mx + pf))) {
+			// 	// console.log("HURAYYY!!! I'm on LINE")
+			// 	inside = true;
+			// }
+		}
+	} catch (error) {
+		console.error(error);
+	}
+	console.log('inside ' + inside)
+
+	return inside;
 }
 
 function insideRectangle(mx, my, s) {
@@ -317,6 +452,45 @@ function insideEllipse(mx, my, s) {
 	}
 
 	return inside;
+}
+
+function isOnLineCorner(mx, my, s) {
+
+	// let dot1 = {
+	// 	x: shape.x1,
+	// 	y: shape.y1,
+	// 	r: dotRadius,
+	// 	fill: "#f7660c",
+	// 	isDragging: false,
+	// 	isResizing: false
+	// }
+	// let dot2 = {
+	// 	x: shape.x2,
+	// 	y: shape.y2,
+	// 	r: dotRadius,
+	// 	fill: "#f7660c",
+	// 	isDragging: false,
+	// 	isResizing: false
+	// }
+	// ctx.fillStyle = dot1.fill;
+	// ctx.beginPath();
+	// ctx.arc(dot1.x, dot1.y, dot1.r, 0, Math.PI * 2);
+	// ctx.arc(dot2.x, dot2.y, dot2.r, 0, Math.PI * 2);
+	// ctx.closePath();
+	// ctx.fill();
+
+
+	let onCorner = false;
+	// console.log(mx + ' == ' + resizePointX + ' && ' + my + ' == ' + resizePointY);
+	if (mx > (s.x2 - dotRadius) && mx < (s.x2 + dotRadius)) {
+		console.log("--> INSIDE X POINTS <--");
+		if (my > (s.y2 - dotRadius) && my < (s.y2 + dotRadius)) {
+			console.log("--> INSIDE Y POINTS <--");
+			onCorner = true;
+		}
+	}
+	// console.log("onCorner " + onCorner);
+	return onCorner;
 }
 
 function isOnRectCorner(mx, my, s) {
@@ -393,8 +567,15 @@ function myMove(e) {
 		for (var i = 0; i < shapes.length; i++) {
 			var s = shapes[i];
 			if (s.isDragging) {
-				s.x += dx;
-				s.y += dy;
+				if (s.type == 'line') {
+					s.x1 += dx;
+					s.y1 += dy;
+					s.x2 += dx;
+					s.y2 += dy;
+				} else {
+					s.x += dx;
+					s.y += dy;
+				}
 			}
 		}
 
@@ -407,8 +588,11 @@ function myMove(e) {
 			for (var i = 0; i < shapes.length; i++) {
 				var s = shapes[i];
 				if (s.isResizing && s.width) {
-					s.width = s.width + dx;
-					s.height = s.height + dy;
+					s.width += dx;
+					s.height += dy;
+				} else if (s.isResizing && s.type == 'line') {
+					s.x2 += dx;
+					s.y2 += dy;
 				}
 			}
 		}
