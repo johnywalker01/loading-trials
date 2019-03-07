@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas Trials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="onBodyLoad()" onunload="onBodyUnLoad()">
+    <h2>Add a dot in canvas (on mouse click).</h2>
+
+    <canvas id="myCanvas"></canvas>
+    <br>Mouse x : <label id="mouseXLbl"></label>
+    <br>Mouse y : <label id="mouseYLbl"></label>
+    <br>
+    Rotate (0 - 360): <input id="rotateInput" type="number" name="radius" min="0" max="360" value="0">
+
+    <button onclick="redrawAll()">Re-draw</button>
+</body>
+
+</html>
