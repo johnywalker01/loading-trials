@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Canvas Trials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="onBodyLoad()" onunload="onBodyUnLoad()">
+    <h2>Draw a shape and mimic scale factor proportionate to image scale in background</h2>
+
+    <div id="canvasDiv" class="canvasSpace">
+        <canvas id="myCanvas"></canvas>
+        <canvas id="myCanvas2"></canvas>
+    </div>
+    <br>
+    <div>
+        <label>Scale (0.25 - 15):</label>
+        <button class="stepBtn" onclick="stepUp()">+</button>
+        <button class="stepBtn" onclick="stepDown()">-</button>
+        <span id="scaleLbl" class="scaleLabel">1</span>
+        <br>
+        <input type="radio" name="shape" value="line" checked onchange="onShapeChange()"> Line
+        <input type="radio" name="shape" value="rectangle" onchange="onShapeChange()"> Rectangle
+        <br>
+    </div>
+
+    <p id="screen-log"></p>
+</body>
+
+</html>
