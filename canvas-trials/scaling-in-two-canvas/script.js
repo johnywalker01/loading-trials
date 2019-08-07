@@ -51,7 +51,8 @@ function onBodyLoad() {
     doInitialSettings();
 
     // canvasImage.src = 'https://www.spaceanswers.com/wp-content/uploads/2019/01/as11-44-6667.jpg';
-    canvasImage.src = 'https://www.mathgoodies.com/sites/all/modules/custom/lessons/images/graphs/construct_line_incorrect.jpg';
+    // canvasImage.src = 'https://www.mathgoodies.com/sites/all/modules/custom/lessons/images/graphs/construct_line_incorrect.jpg';
+	canvasImage.src = 'https://radmedix.com/wp-content/uploads/2016/09/radmedix-human_examples-Chest-PA-843x1024.jpg'
 
     addMouseEventListeners();
 }
