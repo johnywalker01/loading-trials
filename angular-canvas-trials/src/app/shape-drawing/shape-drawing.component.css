@@ -1,0 +1,24 @@
+canvas {
+  border: 1px solid grey;
+}
+
+.canvasContainer {
+  position: relative;
+  width: 902px;
+  height: 602px;
+  border: 1px solid red;
+}
+
+.canvasKlass {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.shape-select-box {
+  padding: 10px 5px;
+}
+
+.radioKlass {
+  padding: 3px 8px;
+}

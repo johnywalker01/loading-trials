@@ -1,0 +1,23 @@
+<h3>This page features</h3>
+<ol>
+  <li>Draw shapes using mouse drag</li>
+  <li>print area of clipped image in console</li>
+</ol>
+
+
+<div class="shape-select-box">
+    <label id="radio-group-label">Pick your shape : </label>
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      [(ngModel)]="shapeType">
+      <mat-radio-button class="radioKlass" value="freeROI" [checked]="true">Free ROI</mat-radio-button>
+      <mat-radio-button class="radioKlass" value="circle">Circle</mat-radio-button>
+      <mat-radio-button class="radioKlass" value="rectangle">Rectangle</mat-radio-button>
+    </mat-radio-group>
+</div>
+<button (click)="loadImageInCanvas()">Load Image</button>
+<div class="canvasContainer">
+  <canvas class="canvasKlass" appImageRenderer></canvas>
+  <canvas class="canvasKlass" appShapeRenderer [shapeType]="shapeType" (areaCalculated)="onAreaCalculated($event)"></canvas>
+</div>
+<label>Area is : {{shapeArea}}</label>
