@@ -91,10 +91,10 @@ function mouseDown(e) {
     // get the current mouse position
     let mx = Math.floor(e.offsetX || (e.pageX - offsetX));
     let my = Math.floor(e.offsetY || (e.pageY - offsetY));
-
+	console.log('cmx', mx, 'cmy', my);
+	
     if (model.angleInRad > 0) {
         let pos = getTransformedCoords(new Position(mx, my));
-        console.log('cmx', pos.x, 'cmy', pos.y)
         mx = pos.x;
         my = pos.y;
     }
