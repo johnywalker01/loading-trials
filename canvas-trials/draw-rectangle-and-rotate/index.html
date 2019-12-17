@@ -13,11 +13,25 @@
     <h2>Draw Multiple Rectangles on Canvas</h2>
     <h3>Using mouse drag</h3>
 
-    <canvas id="myCanvas"></canvas>
-    <input type="color" id="brushInput" name="brush" value="#f6b73c" onchange="onColorChange()">
-    <label for="brush">Brush</label>
-    <input type="color" id="antiBrushInput" name="antibrush" value="#f6b73c" onchange="onColourChange()">
-    <button onclick="makeRandomColor()">Random</button>
+    <p>
+        Select an operation : 
+        <select id="myOperation" onchange="onOpsChange()">
+            <option value="drawShape">Draw Shape</option>
+            <option value="rotateCanvas">Rotate Canvas</option>
+        </select>
+        <button onclick="resetRotation()">Reset Angle</button>
+    </p>
+    <p>
+        <canvas id="myCanvas"></canvas>
+        <br>
+        Rotation : <label id="labelCanvasRotation"></label>
+    </p>
+    <p>
+        <input type="color" id="brushInput" name="brush" value="#f6b73c" onchange="onColorChange()">
+        <label for="brush">Brush</label>
+        <input type="color" id="antiBrushInput" name="antibrush" value="#f6b73c" onchange="onColourChange()">
+        <button onclick="makeRandomColor()">Random</button>
+    </p>
 
     <br>Mouse x : <label id="mouseXLbl"></label>
     <br>Mouse y : <label id="mouseYLbl"></label>

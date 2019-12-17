@@ -21,6 +21,11 @@ let dotColour = '#f6b73c';
 let dragMyShape = false;
 let genSrchRad = 5;
 let genRad = 2;
+let selectedOps = '';
+let prevAngle;
+let centerX;
+let centerY;
+let mouseDownAngle;
 
 class Point {
     constructor(x, y) {
@@ -32,9 +37,13 @@ class Point {
 class Shape {
     drag = false;
     doHl = false;
+    rotStart;
+    rotEnd;
     constructor(start, end) {
         this.start = start;
         this.end = end;
+        this.rotStart = this.start;
+        this.rotEnd = this.end;
     }
 }
 
@@ -62,6 +71,7 @@ function onBodyLoad() {
     model.canvas.onmouseup = mouseUpEvent;
 
     myShape = null;
+    onOpsChange();
 }
 
 function makeRandomColor() {
@@ -127,6 +137,10 @@ function onColourChange() {
     let colorElem = document.getElementById('antiBrushInput');
     dotColour = colorElem.value;
 }
+function onOpsChange() {
+    let opsElem = document.getElementById('myOperation');
+    selectedOps = opsElem.value;
+}
 
 function clear() {
     model.ctx.clearRect(0, 0, model.canvas.width, model.canvas.height);
@@ -142,7 +156,13 @@ function mouseDownEvent(e) {
     // get the current mouse position
     let point = getCurrentMousePoint(e);
 
-    checkMouseOnShapeRef(point);
+    if (selectedOps == 'drawShape') {
+        checkMouseOnShapeRef(point);
+
+    } else if (selectedOps == 'rotateCanvas') {
+        beginRotate(e);
+    }
+
     mouseDown = true;
     mouseDownPoint = point;
     lastMousePoint = point;
@@ -169,34 +189,44 @@ function mouseMoveEvent(e) {
     updateMouseLabels(point.x, point.y);
 
     if (mouseDown) {
-        let dx = point.x - lastMousePoint.x;
-        let dy = point.y - lastMousePoint.y;
+        if (selectedOps == 'drawShape') {
 
-        if (dragMyShape) {
-            // console.log('dragging')
-            const newShapes = myShapes.filter((shape) => (shape.drag));
-            newShapes.forEach(shape => {
-                shape.start.x += dx;
-                shape.start.y += dy;
-                shape.end.x += dx;
-                shape.end.y += dy;
-            });
+            let dx = point.x - lastMousePoint.x;
+            let dy = point.y - lastMousePoint.y;
 
-        } else {
-            const newShapes = myShapes.filter((shape) => shape.start == mouseDownPoint)
-            if (newShapes.length == 0) {
-                myShapes.push(new Shape(mouseDownPoint, point));
-                // console.log('added')
-            } else {
+            if (dragMyShape) {
+                // console.log('dragging')
+                const newShapes = myShapes.filter((shape) => (shape.drag));
                 newShapes.forEach(shape => {
-                    shape.end = point;
-                    // console.log('modified')
+                    shape.start.x += dx;
+                    shape.start.y += dy;
+                    shape.end.x += dx;
+                    shape.end.y += dy;
+
+                    shape.rotStart = shape.start;
+                    shape.rotEnd = shape.end;
                 });
+
+            } else {
+                const newShapes = myShapes.filter((shape) => shape.start == mouseDownPoint)
+                if (newShapes.length == 0) {
+                    myShapes.push(new Shape(mouseDownPoint, point));
+                    // console.log('added')
+                } else {
+                    newShapes.forEach(shape => {
+                        shape.end = point;
+                        shape.rotEnd = shape.end;
+                        // console.log('modified')
+                    });
+                }
             }
+            clear();
+            drawShape();
+            lastMousePoint = point;
+
+        } else if (selectedOps == 'rotateCanvas') {
+            onRotate(e);
         }
-        clear();
-        drawShape();
-        lastMousePoint = point;
     }
 }
 
@@ -207,15 +237,6 @@ function drawShape() {
         let w = shape.end.x - shape.start.x;
         let h = shape.end.y - shape.start.y;
         model.ctx.strokeRect(shape.start.x, shape.start.y, w, h);
-        // model.ctx.rect(shape.start.x, shape.start.y, w, h);
-        // model.ctx.stroke();
-
-        // let x = shape.start.x;
-        // let y = shape.start.y;
-        // model.ctx.beginPath();
-        // model.ctx.arc(x, y, r, 0, Math.PI * 2);
-        // model.ctx.fillStyle = dotColour;
-        // model.ctx.fill();
         drawDots(shape.start.x, shape.start.y, genRad)
     });
     // drawDots();
@@ -226,11 +247,6 @@ function drawDots(x, y, r) {
     model.ctx.arc(x, y, r, 0, Math.PI * 2);
     model.ctx.fillStyle = dotColour;
     model.ctx.fill();
-    // let r = 2;
-    // myShapes.forEach((shape) => {
-    //     let x = shape.start.x;
-    //     let y = shape.start.y;
-    // });
 }
 
 function updateMouseLabels(mx, my) {
@@ -248,11 +264,15 @@ function mouseUpEvent(e) {
 
     if (mouseDown) {
         mouseDown = false;
-        myShapes.forEach(shape => {
-            shape.drag = false;
-        });
-        dragMyShape = false;
-        // console.log(myShapes)
+        if (selectedOps == 'drawShape') {
+            myShapes.forEach(shape => {
+                shape.drag = false;
+            });
+            dragMyShape = false;
+            // console.log(myShapes)
+        } else if (selectedOps == 'rotateCanvas') {
+            stopRotate(e);
+        }
     }
 
 }
@@ -283,4 +303,114 @@ function checkMouseOnShapeRefWhileMove(shapePoint, mousePoint) {
     if (shapePoint)
         return checkPoint(shapePoint, mousePoint, genSrchRad)
     else return false;
+}
+
+function getAngle(cX, cY, mX, mY) {
+    let rad = Math.atan2(mY - cY, mX - cX);
+    return rad;
+}
+
+function beginRotate(event) {
+    let offX = model.canvas.getBoundingClientRect().left;
+    let offY = model.canvas.getBoundingClientRect().top;
+    // centerX = 0.5 * model.canvas.width;
+    // centerY = 0.5 * model.canvas.height;
+    centerX = 0; // begining of the canvas in X axis
+    centerY = 0; // begining of the canvas in Y axis
+
+    // console.log(model.canvas.width,model.canvas.height)
+    let m1x = centerX + offX;
+    let m1y = centerY + offY;
+    let m2x = event.clientX;
+    let m2y = event.clientY;
+
+    prevAngle = getAngle(m1x, m1y, m2x, m2y);
+    mouseDownAngle = prevAngle - model.angleInRad;
+}
+
+function onRotate(event) {
+    let offX = model.canvas.getBoundingClientRect().left;
+    let offY = model.canvas.getBoundingClientRect().top;
+
+    let m1x = centerX + offX;
+    let m1y = centerY + offY;
+    let m2x = event.clientX;
+    let m2y = event.clientY;
+
+    let currAngle = this.getAngle(m1x, m1y, m2x, m2y);
+
+    model.angleInRad = getCorrectedRadians(currAngle - mouseDownAngle);
+    let changeInAngle = currAngle - (prevAngle - model.angleInRad);
+    console.log('changeInAngle', changeInAngle)
+    prevAngle = currAngle;
+    doShapeRotation();
+}
+function stopRotate(event) {
+    // TODO -- add any code required on stoping rotation
+}
+
+function doShapeRotation() {
+    for (const shape of myShapes) {
+        rotateShapePoints(shape)
+    }
+    clear();
+    drawShape();
+    updateRotationInfoLabel();
+}
+
+function getRotatedPoint(point, angle) {
+    let cos = Math.cos(angle);
+    let sin = Math.sin(angle);
+    let newx = Math.floor(point.x * cos - point.y * sin);
+    let newy = Math.floor(point.x * sin + point.y * cos);
+    let newPoint = new Point(newx, newy);
+    return newPoint;
+}
+
+function rotateShapePoints(shape) {
+    let width = shape.end.x - shape.start.x;
+    let height = shape.end.y - shape.start.y;
+
+    shape.start = getRotatedPoint(shape.rotStart, model.angleInRad)
+
+    shape.end.x = shape.start.x + width;
+    shape.end.y = shape.start.y + height;
+}
+
+function updateRotationInfoLabel() {
+    let rotationInfoElem = document.getElementById('labelCanvasRotation');
+    let angle = toFixed(toDegrees(toFixed(model.angleInRad, 5)), 2);
+    rotationInfoElem.innerText = angle;
+}
+
+function toDegrees(radians) {
+    let angleInDegree = 0;
+    angleInDegree = radians * (180 / Math.PI);
+    return angleInDegree;
+}
+
+function toRadians(degrees) {
+    let angleInRadians = 0;
+    angleInRadians = degrees * (Math.PI / 180);
+    return angleInRadians;
+}
+
+function getCorrectedRadians(rad) {
+    if (rad < 0) {
+        rad += Math.PI * 2;
+    }
+    else if (rad > 6.28319) {
+        rad -= Math.PI * 2;
+    }
+    return rad;
+}
+
+function toFixed(value, precision) {
+    var power = Math.pow(10, precision || 0);
+    return Number(Math.round(value * power) / power);
+}
+
+function resetRotation() {
+    model.angleInRad = 0;
+    doShapeRotation();
 }
