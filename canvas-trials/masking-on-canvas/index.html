@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Canvas Trials</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+
+<body onload="onBodyLoad()" onunload="onBodyUnLoad()">
+  <h2>globalCompositeOperation on canvas </h2>
+  <h3>Using selection from drop-down</h3>
+
+  <div class="flex-container">
+    <div>
+      <canvas id="myCanvas"></canvas>
+    </div>
+    <div class="direction-col">
+      <div class="settings-div">
+        <label for="imageOrder">Choose a drawing option:</label>
+        <select id="imageOrder" onchange="onChangeImageDrawingOrder()">
+          <option value="imageBefore">Image Before Shape</option>
+          <option value="imageLater">Image After Shape</option>
+        </select>
+      </div>
+      <div class="settings-div">
+        <label>Shape Drawing Mode</label>
+        <select id="shapeMode" onchange="onChangeShapeDrawingMode()">
+          <option value="fill">Fill</option>
+          <option value="stroke">Stroke</option>
+        </select>
+      </div>
+      <div class="settings-div">
+        <label for="lineWidth">Line width:</label>
+        <input type="range" min="1" max="30" value="1" class="slider" id="lineWidth"  oninput="onInputLineWidth()">
+        Value: <span id="lineWidthValue"></span>
+      </div>
+      <div class="settings-div">
+        <label for="rectSize">Rectangle width:</label>
+        <input type="range" min="50" max="250" value="250" class="slider" id="rectSize"  oninput="onInputRectSize()">
+        Value: <span id="rectSizeValue"></span>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
