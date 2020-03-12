@@ -18,6 +18,7 @@
       <canvas id="myCanvas"></canvas>
     </div>
     <div class="direction-col width-390">
+
       <div class="settings-div">
         <label for="imageOrder">Choose a drawing option:</label>
         <select id="imageOrder" onchange="onChangeImageDrawingOrder()">
@@ -25,6 +26,7 @@
           <option value="imageLater">Image After Shape</option>
         </select>
       </div>
+
       <div class="settings-div">
         <label>Shape Drawing Mode</label>
         <select id="shapeMode" onchange="onChangeShapeDrawingMode()">
@@ -32,31 +34,37 @@
           <option value="stroke">Stroke</option>
         </select>
       </div>
+
       <div class="settings-div">
         <label for="lineWidth">Line width:</label>
-        <input type="range" min="1" max="100" value="10" class="slider" id="lineWidth"  oninput="onInputLineWidth()">
+        <input type="range" min="1" max="100" value="10" class="slider" id="lineWidth" oninput="onInputLineWidth()">
         <span id="lineWidthValue"></span>
       </div>
+
       <div class="settings-div">
         <label for="rectX">Rectangle Start X:</label>
-        <input type="range" min="5" max="250" value="10" class="slider" id="rectX"  oninput="onInputStartX()">
+        <input type="range" min="5" max="250" value="10" class="slider" id="rectX" oninput="onInputStartX()">
         <span id="rectXValue"></span>
       </div>
+
       <div class="settings-div">
         <label for="rectY">Rectangle Start Y:</label>
-        <input type="range" min="5" max="250" value="10" class="slider" id="rectY"  oninput="onInputStartY()">
+        <input type="range" min="5" max="250" value="10" class="slider" id="rectY" oninput="onInputStartY()">
         <span id="rectYValue"></span>
       </div>
+
       <div class="settings-div">
         <label for="rectWidth">Rectangle width:</label>
-        <input type="range" min="50" max="250" value="250" class="slider" id="rectWidth"  oninput="onInputRectWidth()">
+        <input type="range" min="50" max="250" value="250" class="slider" id="rectWidth" oninput="onInputRectWidth()">
         <span id="rectWidthValue"></span>
       </div>
+
       <div class="settings-div">
         <label for="rectHeight">Rectangle Height:</label>
-        <input type="range" min="50" max="250" value="250" class="slider" id="rectHeight"  oninput="onInputRectHeight()">
+        <input type="range" min="50" max="250" value="250" class="slider" id="rectHeight" oninput="onInputRectHeight()">
         <span id="rectHeightValue"></span>
       </div>
+
     </div>
   </div>
 

@@ -3,15 +3,15 @@ let model = {
     canvas: {},
     width: 500,
     height: 500,
-    imageOrder: 'imageBefore',
+    imageOrder: 'imageBefore'
 };
 let shape = {
-    lineWidth: 10,
+    lineWidth: 1,
     shapeMode: 'fill',
     width: 250,
     height: 250,
     startX: 80,
-    startY: 80
+    startY: 80,
 };
 
 let canvasImage = new Image;
@@ -56,6 +56,7 @@ function drawShape() {
 function drawRectangle() {
     // the rectangle segment
     model.ctx.beginPath();
+
     model.ctx.rect(shape.startX, shape.startY, shape.width, shape.height);
 
     if (shape.shapeMode == 'fill') {
@@ -66,6 +67,7 @@ function drawRectangle() {
     else if (shape.shapeMode == 'stroke') {
         // drawing the rectangle by stroke method
         model.ctx.lineWidth = shape.lineWidth;
+
         model.ctx.strokeStyle = '#F00';
         model.ctx.stroke();
     }
