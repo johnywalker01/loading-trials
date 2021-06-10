@@ -1,5 +1,16 @@
 function onload() {
     accordionAlgo();
+
+    var temp = 'b';
+    var myObject = { a: 'c', b: 'a', c: 'b' };
+    var keyNames = Object.keys(myObject);
+    console.log(keyNames);
+    const element = myObject[temp];
+    console.log('e',element);
+    // for (const key in myObject) {
+    //     if (myObject.hasOwnProperty(temp)) {
+    //     }
+    // }
 }
 
 function accordionAlgo() {

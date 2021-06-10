@@ -97,6 +97,7 @@ function updateShape(point) {
     let dx = point.xAxis + 0.5 * width;
     let dy = point.yAxis + 0.5 * height;
     model.context.translate(dx, dy);
+	model.context.rotate(0.7931);
     // model.context.fillStyle = model.bgColor;
     // model.context.fillRect(-0.5 * width, -0.5 * height, width, height);
     model.context.drawImage(this.csImage, -0.5 * width, -0.5 * height, width, height);

@@ -50,7 +50,7 @@ function updateShape(ang) {
 
     let sx = width * 0.5;
     let sy = height * 0.5;
-    console.log('image start x ' + sx + '\t' + 'y ' + sy);
+    console.log('image start x ' + sx + '\t' + 'y ' + sy,'angle',ang);
 
     model.context.rotate(ang);
     // model.context.fillStyle = model.bgColor;
